@@ -1,0 +1,20 @@
+services:
+  api:
+    build: .
+    container_name: employee_stats_api
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=development
+    depends_on:
+      - nginx
+
+  nginx:
+    image: nginx:latest
+    container_name: employee_stats_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
