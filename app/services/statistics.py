@@ -187,7 +187,9 @@ def get_gender_distribution() -> dict[str, int]:
         dict[str, int]: Gender to count mapping.
     """
     df = load_dataframe()
-    return df["gender"].value_counts(dropna=False).to_dict()
+    return (
+        df["gender"].fillna("Unknown").value_counts().to_dict()
+    )
 
 
 def get_age_distribution() -> dict[str, Any]:
